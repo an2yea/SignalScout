@@ -1,13 +1,57 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
+// A simple URL validation function
+const isValidUrl = (url: string) => {
+  try {
+    new URL(url);
+    return true;
+  } catch (_) {
+    return false;
+  }
+};
+
 export const CTASection: React.FC = () => {
   const [url, setUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const isUrlValid = isValidUrl(url);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Scanning URL:', url);
-    // Handle form submission here
+    if (!isUrlValid) {
+      setError('Please enter a valid URL.');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      const response = await fetch('http://localhost:3001/api/scrape', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      setSuccessMessage(`Success! Content saved to ${data.filename}`);
+      setUrl(''); // Clear the input on success
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -36,19 +80,24 @@ export const CTASection: React.FC = () => {
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://yourcompany.com"
               className="w-full px-6 py-4 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200 text-lg"
-              required
             />
           </div>
           
           <motion.button
             type="submit"
+            disabled={!isUrlValid || isLoading}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-lg"
+            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Find My Users
+            {isLoading ? 'Scanning...' : 'Find My Users'}
           </motion.button>
         </form>
+
+        <div className="mt-4 h-6">
+          {error && <p className="text-red-400 text-sm">{error}</p>}
+          {successMessage && <p className="text-green-400 text-sm">{successMessage}</p>}
+        </div>
 
         <p className="text-gray-500 text-sm mt-8">
           Built by GTM hackers
