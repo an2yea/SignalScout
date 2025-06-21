@@ -3,7 +3,6 @@ import { NetworkBackground } from './components/NetworkBackground';
 import { CentralHub } from './components/CentralHub';
 import { RedditPost } from './components/RedditPost';
 import { ConnectionLines } from './components/ConnectionLines';
-import { ScrollNudge } from './components/ScrollNudge';
 import { CTASection } from './components/CTASection';
 
 const redditPosts = [
@@ -43,25 +42,20 @@ const redditPosts = [
 
 function App() {
   const [animationPhase, setAnimationPhase] = useState(0);
-  const [showScrollNudge, setShowScrollNudge] = useState(false);
   const [autoScrollTriggered, setAutoScrollTriggered] = useState(false);
 
   useEffect(() => {
     const timeline = [
       { phase: 1, delay: 0 },      // Start pulse (0s)
       { phase: 2, delay: 1000 },   // Show Reddit posts (1s)
-      { phase: 3, delay: 4000 },   // Connect lines (4s)
-      { phase: 4, delay: 7000 },   // Show scroll nudge (7s)
-      { phase: 5, delay: 10000 },  // Auto scroll (10s)
+      { phase: 3, delay: 2200 },   // Connect lines (2.2s - after last post appears)
+      { phase: 4, delay: 3500 },   // Auto scroll (3.5s - shortly after connections)
     ];
 
     timeline.forEach(({ phase, delay }) => {
       setTimeout(() => {
         setAnimationPhase(phase);
         if (phase === 4) {
-          setShowScrollNudge(true);
-        }
-        if (phase === 5) {
           setAutoScrollTriggered(true);
           // Auto scroll to CTA section
           const ctaSection = document.getElementById('cta-section');
@@ -71,8 +65,6 @@ function App() {
               block: 'start'
             });
           }
-          // Hide scroll nudge after scroll starts
-          setTimeout(() => setShowScrollNudge(false), 1000);
         }
       }, delay);
     });
@@ -80,7 +72,6 @@ function App() {
 
   const handleReplayAnimation = () => {
     setAnimationPhase(0);
-    setShowScrollNudge(false);
     setAutoScrollTriggered(false);
     
     // Scroll back to top
@@ -91,18 +82,14 @@ function App() {
       const timeline = [
         { phase: 1, delay: 0 },
         { phase: 2, delay: 1000 },
-        { phase: 3, delay: 4000 },
-        { phase: 4, delay: 7000 },
-        { phase: 5, delay: 10000 },
+        { phase: 3, delay: 2200 },
+        { phase: 4, delay: 3500 },
       ];
 
       timeline.forEach(({ phase, delay }) => {
         setTimeout(() => {
           setAnimationPhase(phase);
           if (phase === 4) {
-            setShowScrollNudge(true);
-          }
-          if (phase === 5) {
             setAutoScrollTriggered(true);
             const ctaSection = document.getElementById('cta-section');
             if (ctaSection) {
@@ -111,7 +98,6 @@ function App() {
                 block: 'start'
               });
             }
-            setTimeout(() => setShowScrollNudge(false), 1000);
           }
         }, delay);
       });
@@ -148,11 +134,17 @@ function App() {
           />
         )}
         
-        {/* Scroll nudge */}
-        <ScrollNudge 
-          isVisible={showScrollNudge} 
-          onReplay={handleReplayAnimation}
-        />
+        {/* Replay button - only show after scroll */}
+        {autoScrollTriggered && (
+          <div className="absolute top-8 right-8">
+            <button
+              onClick={handleReplayAnimation}
+              className="text-gray-400 hover:text-gray-200 text-sm underline transition-colors duration-200 bg-gray-800/50 px-3 py-2 rounded-lg backdrop-blur-sm"
+            >
+              ↻ Replay animation
+            </button>
+          </div>
+        )}
       </div>
       
       {/* CTA Section */}
