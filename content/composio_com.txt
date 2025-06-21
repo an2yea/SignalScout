@@ -1,0 +1,149 @@
+Composio MCPNEW
+Tools
+Docs
+Pricing
+Explore
+
+TOOL KITS
+
+Composio MCP ➔
+AgentAuth ➔
+SWE-Kit ➔
+SDR Kit ➔
+AI Crypto Kit ➔
+
+SOLUTIONS
+
+Enterprise ➔
+Agency ➔
+Startups Program ➔
+
+Need Custom Solution?
+
+We also provide custom solutions for your business needs
+
+Talk to us
+
+Why Composio
+
+Integration for AI & LLMs
+
+Connect over 250 apps effortlessly
+
+24/7 Support
+
+Blog
+Sign In
+Star
+25k+
+Integration Platform
+for AI Agents & LLMs
+Get started for free
+Explore Docs
+Trusted by Engineers From
+Frameworks & LLM Model Agnostic
+Out of box support for 10+ popular Agentic frameworks and works with all the LLM providers using function calling.
+Repository of Tools
+
+Easily Integrate LLMs with 250+ tools (Github, Salesforce, File Manager, Code Execution & More) to perform actions & subscribe to triggers.
+
+Managed Auth
+
+Manage authentication for all users/agents from a single dashboard.
+
+Composio's Core Features
+Developer First Agentic Integration Platform
+
+Fastest way to Authenticate & Integrate LLM to tools via Function Calling
+
+Managed Auth
+
+Built-in auth management provides engineers less things to worry about.
+
+250+ Tools - Ready to Connect
+
+Ever expanding tools catalog with the support to easily add custom tools.
+
+30% Increase in Reliability
+We simplify JSON structures, improve variables names, better error handling. (Read more)
+SOC - Type II
+
+100% compliant and maximum security of user’s data.
+
+Powerful RPA tools
+
+Spin up a MacOS/Ubuntu instance on the fly & let the agents take control. Execute code remotely.
+
+Tools
+Plug right into your
+tech stack
+
+Connect your AI Agents & LLMs to 250+ tools. From System tools to SaaS apps, we’ve got your integration needs covered.
+
+See All Tools
+Build Agents Faster without worrying about Integrations
+AssistaAI Accelerated Time To Market By 8x And Saved 100s Of Hours With Composio
+Assista AI
+Assista AI
+Assista is building an all-in-one AI-powered productivity platform that integrates multiple apps and tools, such as Gmail, Calendar, GitHub, and Drive, into a centralized hub to streamline workflows, automate repetitive tasks, enhance collaboration, and provide actionable insights.
+Read More
+How Composio Helped Gorilla, UC Berkeley Ship AgentArena saving 100s of Engineering hours
+Gorilla
+Gorilla
+AgentArena is a playground developed by the Gorilla team from UC Berkeley. It allows you to pit two agents against each other based on a goal you provide to decide their real-world efficiency. It evaluates LLMs, frameworks, and API tools across different categories.
+Read More
+Fabrile Integrated Google Apps In 30 Minutes To Showcase MVP At TechCrunch Disrupt
+Fabrile
+Fabrile
+Fabrile, a no-code AI platform by Ingram Technologies, enables businesses to create AI-driven chatbots and automate workflows without coding. It seamlessly integrates with data sources like web pages, wikis, CRMs, and file storage for intelligent application development.
+Read More
+What people say about Composio
+Burca Paul
+@paul1493
+Big shoutout to @composiohq! This team excels at handling not just issues, but our internal requirements too. I've never seen problems resolved so quickly. 💪 #CustomerSupport #AssistaAI
+LlamaIndex 🦙
+@llama_index
+Composio (@composiohq) is a cool production-ready toolset for AI agents 🛠️ - it includes 100+ tools including Github, Slack, Salesforce, and more. We are eager to feature a tutorial by the Composio team on how to build a PR review agent using Composio Github/Slack tools and @llama_index agent abstractions! 🤖🧑‍💻 Check it out: https://github.com/ComposioHQ/composio/tree/master/python/examples/pr_agent/pr_agent_llama_index
+meng shao
+@shao__meng
+Composio @composiohq 4.3k✨ Composio 是将 AI Agent 与最佳 Agents 工具集成并使用它们来完成任务的最佳工具集。 🔥主要特点🔥 - 100 多种工具： --> 支持各种不同类别软件：可在 GitHub、Notion、Linear、Gmail、Slack、Hubspot、Salesforce 和其他 90 多个平台上执行任何操作 --> 操作系统：可点击任何地方、输入任何内容、复制到剪贴板等 --> 浏览器：智能搜索、截图、MultiOn @MultiOn_AI、下载、上传等 --> 搜索：Google 搜索、Perplexity 搜索、Tavily @tavilyai、Exa @ExaAILabs 等 --> 软件工程：Ngrok、数据库、Redis、Vercel、Git 等 --> RAG：即时为任何类型的数据提供 Agentic RAG.......
+Slava Kurilyak
+@slavakurilyak
+Excited to feature Composio! @GanatraSoham and @KaranVaidya6 set out to empower AI Agents with essential tools. Composio allows you to plug 90+ tools into your AI agents. Ship super fast without worrying about integrations.
+João Moura
+@joaomdmoura
+🔥 CrewAI + Composio + E2B 🔥
+Tereza Tizkova 🦄 HIRING!
+@tereza_tizkova
+SQL AI Agent with Crew AI, E2B, and Composio 🔸 General SQL queries from natural language 🔸 Connects with your internal databases 🔸 Generates visualizations. Built with @e2b_dev for code execution, @crewAIInc (@joaomdmoura) as an agentic framework, and @composiohq's toolset. 🔸 Author: @KaranVaidya6 Check out the code and demo:
+Soham
+@GanatraSoham
+Composio is trending on Github! Let's goooo 🚀🚀
+Frequently Asked Questions​
+What does Composio do?
+What kind of integrations does Composio support?
+Do you offer any pricing plans?
+Is there a limit to the number of integrations/tools I can create?
+How secure is my data with Composio?
+Schedule a Call
+Explore Docs
+Subscribe to newsletter
+Resources
+Tools
+Blog
+Docs
+Discord
+Case Studies
+Product
+Dashboard
+Pricing
+Startups Program
+Agency
+Enterprise
+Company
+Careers
+Security
+Contact
+© Composio 2025
+Terms
+Privacy Policy

@@ -15,7 +15,7 @@ const redditPosts = [
   {
     text: "Need help automating Stripe workflows",
     keywords: ["automate", "Stripe", "workflows"],
-    position: { x: 75, y: 25 },
+    position: { x: 60, y: 25 },
     isMatched: true
   },
   {

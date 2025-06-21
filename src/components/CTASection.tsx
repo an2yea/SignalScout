@@ -45,7 +45,7 @@ export const CTASection: React.FC = () => {
         throw new Error(data.error || 'Something went wrong');
       }
 
-      setSuccessMessage(`Success! Content saved to ${data.filename}`);
+      setSuccessMessage(`Success! Analysis saved to analyses/${data.analysisFile}`);
       setUrl(''); // Clear the input on success
     } catch (err: any) {
       setError(err.message);
