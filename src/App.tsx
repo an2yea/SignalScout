@@ -3,7 +3,8 @@ import { NetworkBackground } from './components/NetworkBackground';
 import { CentralHub } from './components/CentralHub';
 import { RedditPost } from './components/RedditPost';
 import { ConnectionLines } from './components/ConnectionLines';
-import { OverlayForm } from './components/OverlayForm';
+import { ScrollNudge } from './components/ScrollNudge';
+import { CTASection } from './components/CTASection';
 
 const redditPosts = [
   {
@@ -42,56 +43,120 @@ const redditPosts = [
 
 function App() {
   const [animationPhase, setAnimationPhase] = useState(0);
-  const [showOverlay, setShowOverlay] = useState(false);
+  const [showScrollNudge, setShowScrollNudge] = useState(false);
+  const [autoScrollTriggered, setAutoScrollTriggered] = useState(false);
 
   useEffect(() => {
     const timeline = [
-      { phase: 1, delay: 0 },      // Start pulse
-      { phase: 2, delay: 2000 },   // Show Reddit posts
-      { phase: 3, delay: 5000 },   // Connect lines
-      { phase: 4, delay: 8000 },   // Show overlay
+      { phase: 1, delay: 0 },      // Start pulse (0s)
+      { phase: 2, delay: 1000 },   // Show Reddit posts (1s)
+      { phase: 3, delay: 4000 },   // Connect lines (4s)
+      { phase: 4, delay: 7000 },   // Show scroll nudge (7s)
+      { phase: 5, delay: 10000 },  // Auto scroll (10s)
     ];
 
     timeline.forEach(({ phase, delay }) => {
       setTimeout(() => {
         setAnimationPhase(phase);
         if (phase === 4) {
-          setShowOverlay(true);
+          setShowScrollNudge(true);
+        }
+        if (phase === 5) {
+          setAutoScrollTriggered(true);
+          // Auto scroll to CTA section
+          const ctaSection = document.getElementById('cta-section');
+          if (ctaSection) {
+            ctaSection.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+          // Hide scroll nudge after scroll starts
+          setTimeout(() => setShowScrollNudge(false), 1000);
         }
       }, delay);
     });
   }, []);
 
+  const handleReplayAnimation = () => {
+    setAnimationPhase(0);
+    setShowScrollNudge(false);
+    setAutoScrollTriggered(false);
+    
+    // Scroll back to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Restart animation after scroll completes
+    setTimeout(() => {
+      const timeline = [
+        { phase: 1, delay: 0 },
+        { phase: 2, delay: 1000 },
+        { phase: 3, delay: 4000 },
+        { phase: 4, delay: 7000 },
+        { phase: 5, delay: 10000 },
+      ];
+
+      timeline.forEach(({ phase, delay }) => {
+        setTimeout(() => {
+          setAnimationPhase(phase);
+          if (phase === 4) {
+            setShowScrollNudge(true);
+          }
+          if (phase === 5) {
+            setAutoScrollTriggered(true);
+            const ctaSection = document.getElementById('cta-section');
+            if (ctaSection) {
+              ctaSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+            setTimeout(() => setShowScrollNudge(false), 1000);
+          }
+        }, delay);
+      });
+    }, 500);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-950 relative overflow-hidden font-inter">
-      {/* Network background */}
-      <NetworkBackground opacity={showOverlay ? 0.1 : 0.3} />
-      
-      {/* Central hub with pulses */}
-      <CentralHub isActive={animationPhase >= 1} />
-      
-      {/* Reddit posts */}
-      {animationPhase >= 2 && redditPosts.map((post, index) => (
-        <RedditPost
-          key={index}
-          text={post.text}
-          keywords={post.keywords}
-          position={post.position}
-          delay={index * 0.3}
-          isMatched={post.isMatched}
+    <div className="font-inter">
+      {/* Hero Animation Section */}
+      <div className="min-h-screen bg-gray-950 relative overflow-hidden">
+        {/* Network background */}
+        <NetworkBackground opacity={0.3} />
+        
+        {/* Central hub with pulses */}
+        <CentralHub isActive={animationPhase >= 1} />
+        
+        {/* Reddit posts */}
+        {animationPhase >= 2 && redditPosts.map((post, index) => (
+          <RedditPost
+            key={index}
+            text={post.text}
+            keywords={post.keywords}
+            position={post.position}
+            delay={index * 0.2}
+            isMatched={post.isMatched}
+          />
+        ))}
+        
+        {/* Connection lines */}
+        {animationPhase >= 3 && (
+          <ConnectionLines 
+            isActive={true} 
+            posts={redditPosts}
+          />
+        )}
+        
+        {/* Scroll nudge */}
+        <ScrollNudge 
+          isVisible={showScrollNudge} 
+          onReplay={handleReplayAnimation}
         />
-      ))}
+      </div>
       
-      {/* Connection lines */}
-      {animationPhase >= 3 && (
-        <ConnectionLines 
-          isActive={true} 
-          posts={redditPosts}
-        />
-      )}
-      
-      {/* Overlay form */}
-      <OverlayForm isVisible={showOverlay} />
+      {/* CTA Section */}
+      <CTASection />
     </div>
   );
 }
