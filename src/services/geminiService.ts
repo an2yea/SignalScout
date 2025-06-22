@@ -1,18 +1,36 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-if (!process.env.GEMINI_API_KEY) {
-  throw new Error('GEMINI_API_KEY is not set in the environment variables.');
+export interface ICPAnalysis {
+  targetIndustry: string;
+  companySize: string;
+  jobTitles: string[];
+  painPoints: string[];
+  geographicFocus: string;
+  keywords: string[];
+  hashtags: string[];
+  onlineCommunities: string[];
 }
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 /**
- * @param {string} content
- * @returns {Promise<string>}
+ * Analyze website content for ICP using Gemini AI
  */
-export async function analyzeContentForICP(content) {
+export async function analyzeContentForICP(content: string): Promise<string> {
+  // Debug environment variables
+  console.log('Gemini Environment check:', {
+    hasGeminiKey: !!import.meta.env.VITE_GEMINI_API_KEY,
+    geminiKeyLength: import.meta.env.VITE_GEMINI_API_KEY?.length,
+  });
+
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  
+  if (!apiKey) {
+    console.error('VITE_GEMINI_API_KEY environment variable is not set');
+    console.error('Available env vars:', import.meta.env);
+    throw new Error('VITE_GEMINI_API_KEY environment variable is not set');
+  }
+
+  // Initialize Gemini AI
+  const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = `
