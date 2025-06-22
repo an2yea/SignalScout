@@ -24,7 +24,10 @@ app.use(express.json());
  */
 app.post('/api/scrape', async (req, res) => {
   const { url } = req.body;
+  console.log(`[${new Date().toISOString()}] /api/scrape called with URL: ${url}`);
+  
   if (!url) {
+    console.log(`[${new Date().toISOString()}] /api/scrape - Missing URL parameter`);
     return res.status(400).send({ error: 'URL is required' });
   }
 
@@ -58,6 +61,7 @@ app.post('/api/scrape', async (req, res) => {
     }, null, 2));
 
     // 5. Send a success response
+    console.log(`[${new Date().toISOString()}] /api/scrape - Successfully processed ${url}`);
     res.send({ 
       message: 'Scraping and analysis successful.', 
       contentFile: contentFilename,
@@ -65,7 +69,7 @@ app.post('/api/scrape', async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
+    console.error(`[${new Date().toISOString()}] /api/scrape - Error processing ${url}:`, error);
     res.status(500).send({ error: 'An error occurred during the process.' });
   }
 });
@@ -75,6 +79,8 @@ app.post('/api/scrape', async (req, res) => {
  * @param {import('express').Response} res
  */
 app.post('/api/trigger-n8n', async (_req, res) => {
+  console.log(`[${new Date().toISOString()}] /api/trigger-n8n called`);
+  
   const n8nWebhookUrl = 'https://nishitrl.app.n8n.cloud/webhook-test/2b0c8e9f-d0bf-4ec9-b699-b5c66220dfd6';
 
   const subreddits = ['LangChain', 'crewai', 'AI_Agents'];
@@ -101,10 +107,11 @@ app.post('/api/trigger-n8n', async (_req, res) => {
       throw new Error(`n8n webhook failed with status ${response.status}: ${errorText}`);
     }
 
+    console.log(`[${new Date().toISOString()}] /api/trigger-n8n - Successfully triggered n8n workflow`);
     res.send({ message: 'Successfully triggered n8n workflow.' });
 
   } catch (error) {
-    console.error('Error triggering n8n webhook:', error);
+    console.error(`[${new Date().toISOString()}] /api/trigger-n8n - Error triggering n8n webhook:`, error);
     res.status(500).send({ error: 'Failed to trigger n8n workflow.' });
   }
 });
