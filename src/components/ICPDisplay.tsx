@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { AnalysisResult } from '../services/analysisService';
 import { RedditSignalsDisplay } from './RedditSignalsDisplay';
+import { downloadJson } from '../services/analysisService';
 
 interface ICPDisplayProps {
   result: AnalysisResult;
@@ -45,6 +46,10 @@ export const ICPDisplay: React.FC<ICPDisplayProps> = ({ result, onDownload }) =>
   const { summary, icp } = parsedAnalysis;
   const { firmographics, personas, pains_triggers, success_metrics } = icp;
 
+  const handleDownload = () => {
+    downloadJson(result.analysis, `icp_analysis_${new URL(result.url).hostname.replace(/\./g, '_')}.json`);
+  };
+
   return (
     <div>
       <motion.div
@@ -55,10 +60,13 @@ export const ICPDisplay: React.FC<ICPDisplayProps> = ({ result, onDownload }) =>
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-2xl font-bold text-white">🎯 Your ICP Analysis</h3>
           <button
-            onClick={onDownload}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors text-sm"
+            onClick={handleDownload}
+            className="text-gray-400 hover:text-white transition-colors p-2 rounded-full bg-gray-700/50 hover:bg-gray-600/50"
+            title="Download ICP Analysis"
           >
-            📥 Download JSON
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
           </button>
         </div>
 
@@ -69,7 +77,7 @@ export const ICPDisplay: React.FC<ICPDisplayProps> = ({ result, onDownload }) =>
           transition={{ delay: 0.1 }}
           className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-lg p-4 mb-6 border border-blue-500/30"
         >
-          <h4 className="text-lg font-semibold text-blue-300 mb-2">📋 Executive Summary</h4>
+          <h4 className="text-lg font-semibold text-blue-300 mb-2">📋 Company Overview </h4>
           <p className="text-gray-200 text-sm leading-relaxed">{summary}</p>
         </motion.div>
 
@@ -229,7 +237,10 @@ export const ICPDisplay: React.FC<ICPDisplayProps> = ({ result, onDownload }) =>
 
       {/* Reddit Signals Display */}
       {result.redditSignals && (
-        <RedditSignalsDisplay redditSignalsJson={result.redditSignals} />
+        <RedditSignalsDisplay 
+          redditSignalsJson={result.redditSignals} 
+          onDownload={() => downloadJson(result.redditSignals || '', `reddit_signals_${new URL(result.url).hostname.replace(/\./g, '_')}.json`)}
+        />
       )}
     </div>
   );

@@ -52,12 +52,28 @@ export async function analyzeWebsite(url: string): Promise<AnalysisResult> {
  * Download analysis result as JSON file
  */
 export function downloadAnalysis(result: AnalysisResult): void {
-  const hostname = new URL(result.url).hostname;
-  const timestamp = result.timestamp.replace(/[:.]/g, '-');
-  const filename = `icp_analysis_${hostname.replace(/\./g, '_')}_${timestamp}.json`;
+  const content = JSON.stringify({
+    analysis: JSON.parse(result.analysis), // Pre-parse for formatting
+    redditSignals: result.redditSignals,
+    timestamp: result.timestamp
+  }, null, 2);
+
+  downloadJson(content, `icp_analysis_${new URL(result.url).hostname.replace(/\./g, '_')}_${new Date(result.timestamp).toISOString().replace(/[:.]/g, '-')}.json`);
+}
+
+/**
+ * Generic JSON download utility
+ */
+export function downloadJson(content: string, filename: string): void {
+  let formattedData: string;
+  try {
+    const parsed = JSON.parse(content);
+    formattedData = JSON.stringify(parsed, null, 2);
+  } catch {
+    formattedData = content;
+  }
   
-  const dataStr = JSON.stringify(result, null, 2);
-  const dataBlob = new Blob([dataStr], { type: 'application/json' });
+  const dataBlob = new Blob([formattedData], { type: 'application/json' });
   
   const link = document.createElement('a');
   link.href = URL.createObjectURL(dataBlob);

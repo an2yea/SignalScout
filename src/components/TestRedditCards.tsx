@@ -56,7 +56,7 @@ export const TestRedditCards: React.FC = () => {
           </p>
         </div>
         
-        <RedditPostCards posts={sampleRedditPosts} />
+        <RedditPostCards posts={sampleRedditPosts} onDownload={() => {}} />
       </div>
     </div>
   );
