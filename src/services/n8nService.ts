@@ -2,7 +2,7 @@
  * Trigger n8n Reddit search workflow
  */
 export async function triggerN8nWorkflow(): Promise<{ message: string; response: string }> {
-  const n8nWebhookUrl = 'https://nishitrl.app.n8n.cloud/webhook-test/2b0c8e9f-d0bf-4ec9-b699-b5c66220dfd6';
+  const n8nWebhookUrl = 'https://nishitrl.app.n8n.cloud/webhook/8138febd-bbde-4789-99bf-cbb41d33c756';
 
   const subreddits = ['LangChain', 'crewai', 'AI_Agents'];
   const redditSearchUrl = `https://oauth.reddit.com/r/${subreddits.join('+')}/search`;
