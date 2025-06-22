@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { analyzeWebsite, downloadAnalysis, type AnalysisResult } from '../services/analysisService';
-import { triggerN8nWorkflow } from '../services/n8nService';
+import { triggerN8nWorkflow, downloadN8nResponse } from '../services/n8nService';
+import { RedditSignals } from '../services/redditSignalService';
 import { ICPDisplay } from './ICPDisplay';
 
 // A simple URL validation function
@@ -21,6 +22,7 @@ export const CTASection: React.FC = () => {
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
   const [isTriggering, setIsTriggering] = useState(false);
   const [triggerStatus, setTriggerStatus] = useState<string | null>(null);
+  const [n8nResponse, setN8nResponse] = useState<string | null>(null);
 
   const isUrlValid = isValidUrl(url);
 
@@ -34,6 +36,7 @@ export const CTASection: React.FC = () => {
     setIsLoading(true);
     setError(null);
     setAnalysisResult(null);
+    setN8nResponse(null);
 
     try {
       const result = await analyzeWebsite(url);
@@ -56,8 +59,27 @@ export const CTASection: React.FC = () => {
     setError(null);
 
     try {
-      const result = await triggerN8nWorkflow();
+      let redditSignals: RedditSignals | undefined;
+      
+      // Parse Reddit signals from analysis result if available
+      if (analysisResult?.redditSignals) {
+        try {
+          const cleanedSignals = analysisResult.redditSignals.replace(/```json\n?|\n?```/g, '');
+          redditSignals = JSON.parse(cleanedSignals);
+          console.log('Using Reddit signals from analysis:', redditSignals);
+        } catch (parseError) {
+          console.error('Failed to parse Reddit signals, using fallback:', parseError);
+        }
+      }
+
+      const result = await triggerN8nWorkflow(redditSignals);
       setTriggerStatus(result.message);
+      setN8nResponse(result.response);
+      
+      // Auto-download the n8n response
+      if (analysisResult?.url) {
+        downloadN8nResponse(result.response, analysisResult.url);
+      }
     } catch (err: any) {
       setError(err.message || 'Failed to trigger workflow');
     } finally {
@@ -71,10 +93,17 @@ export const CTASection: React.FC = () => {
     }
   };
 
+  const handleDownloadN8nResponse = () => {
+    if (n8nResponse && analysisResult?.url) {
+      downloadN8nResponse(n8nResponse, analysisResult.url);
+    }
+  };
+
   const handleNewAnalysis = () => {
     setAnalysisResult(null);
     setError(null);
     setTriggerStatus(null);
+    setN8nResponse(null);
   };
 
   return (
@@ -165,15 +194,30 @@ export const CTASection: React.FC = () => {
             />
 
             <div className="text-center space-y-4">
-              <div className="mt-8">
+              <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <button
                   onClick={handleTriggerN8n}
-                  disabled={isTriggering}
+                  disabled={isTriggering || !analysisResult?.redditSignals}
                   className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-md disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isTriggering ? 'Triggering...' : 'Trigger Reddit Search'}
+                  {isTriggering ? 'Triggering...' : 'Start Reddit Hunt 🎯'}
                 </button>
+                
+                {n8nResponse && (
+                  <button
+                    onClick={handleDownloadN8nResponse}
+                    className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-500/50 text-md"
+                  >
+                    📥 Download Reddit Results
+                  </button>
+                )}
               </div>
+              
+              {!analysisResult?.redditSignals && (
+                <p className="text-gray-400 text-xs mt-2">
+                  Reddit signals not available - analysis may still be processing
+                </p>
+              )}
 
               {triggerStatus && (
                 <p className="text-purple-400 text-sm">{triggerStatus}</p>
