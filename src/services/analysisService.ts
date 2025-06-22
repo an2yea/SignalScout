@@ -1,14 +1,16 @@
 import { scrapeWebsite } from './scraper';
 import { analyzeContentForICP } from './geminiService';
+import { mapICPToRedditSignals } from './redditSignalService';
 
 export interface AnalysisResult {
   url: string;
   analysis: string;
+  redditSignals?: string;
   timestamp: string;
 }
 
 /**
- * Complete analysis workflow: scrape website and analyze for ICP
+ * Complete analysis workflow: scrape website, analyze for ICP, and map to Reddit signals
  */
 export async function analyzeWebsite(url: string): Promise<AnalysisResult> {
   try {
@@ -21,10 +23,20 @@ export async function analyzeWebsite(url: string): Promise<AnalysisResult> {
     // 2. Analyze the content for ICP
     const icpAnalysis = await analyzeContentForICP(content);
 
-    // 3. Return the analysis result
+    // 3. Map ICP to Reddit signals
+    let redditSignals: string | undefined;
+    try {
+      redditSignals = await mapICPToRedditSignals(icpAnalysis);
+    } catch (error) {
+      console.error('Failed to generate Reddit signals:', error);
+      // Continue without Reddit signals if this fails
+    }
+
+    // 4. Return the analysis result
     const result: AnalysisResult = {
       url,
       analysis: icpAnalysis,
+      redditSignals,
       timestamp: new Date().toISOString()
     };
 
