@@ -4,6 +4,7 @@ import { CentralHub } from './components/CentralHub';
 import { CTASection } from './components/CTASection';
 import { RedditPost } from './components/RedditPost';
 import { ConnectionLines } from './components/ConnectionLines';
+import { RedditCallback } from './components/RedditCallback';
 
 const redditPosts = [
   {
@@ -43,6 +44,17 @@ const redditPosts = [
 function App() {
   const [animationPhase, setAnimationPhase] = useState(0);
   const [autoScrollTriggered, setAutoScrollTriggered] = useState(false);
+
+  // Check if this is the Reddit OAuth callback
+  if (window.location.pathname === '/auth/reddit/callback') {
+    return <RedditCallback />;
+  }
+
+  // Check if this is the test page
+  if (window.location.pathname === '/test-reddit') {
+    const { TestRedditCards } = require('./components/TestRedditCards');
+    return <TestRedditCards />;
+  }
 
   useEffect(() => {
     const timeline = [

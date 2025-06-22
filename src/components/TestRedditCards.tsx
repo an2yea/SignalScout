@@ -8,7 +8,7 @@ const sampleRedditPosts: RedditPostResult[] = [
     "postUrl": "https://reddit.com/r/LangChain/comments/1lfx5mc/what_should_i_build_next_looking_for_ideas_for_my/",
     "postTitle": "What should I build next? Looking for ideas for my Awesome AI Apps repo!",
     "author": "Arindam_200",
-    "fitScore": "high",
+    "fitScore": "high" as const,
     "who": "unknown",
     "matched_signals": [
       "Posts mentioning 'LangChain'",
@@ -26,7 +26,7 @@ const sampleRedditPosts: RedditPostResult[] = [
     "postUrl": "https://reddit.com/r/LangChain/comments/1lcssom/we_built_a_github_repo_understanding_agent_in/",
     "postTitle": "We built a GitHub Repo Understanding Agent in Just 300 lines of code!!",
     "author": "AdVirtual2648",
-    "fitScore": "high",
+    "fitScore": "high" as const,
     "who": "unknown",
     "matched_signals": [
       "Posts mentioning \"LangChain\"",
