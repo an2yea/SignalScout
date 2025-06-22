@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { redditService } from '../services/redditService';
 import { postCommentToReddit } from '../services/n8nRedditPosterService';
 
 export interface RedditPostResult {
@@ -21,54 +20,9 @@ interface RedditPostCardsProps {
 }
 
 export const RedditPostCards: React.FC<RedditPostCardsProps> = ({ posts, onDownload }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState<any>(null);
   const [commentingPostId, setCommentingPostId] = useState<string | null>(null);
 
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  const checkAuthStatus = async () => {
-    if (redditService.isAuthenticated()) {
-      try {
-        const user = await redditService.getCurrentUser();
-        setCurrentUser(user);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error('Failed to get user info:', error);
-        setIsAuthenticated(false);
-      }
-    }
-  };
-
-  const handleRedditLogin = () => {
-    const authUrl = redditService.generateAuthUrl();
-    window.open(authUrl, 'reddit-auth', 'width=600,height=600');
-    
-    // Listen for auth completion
-    const authListener = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin) return;
-      
-      if (event.data.type === 'REDDIT_AUTH_SUCCESS') {
-        checkAuthStatus();
-        window.removeEventListener('message', authListener);
-      } else if (event.data.type === 'REDDIT_AUTH_ERROR') {
-        console.error('Reddit auth error:', event.data.error);
-        alert('Failed to authenticate with Reddit. Please try again.');
-        window.removeEventListener('message', authListener);
-      }
-    };
-    
-    window.addEventListener('message', authListener);
-  };
-
   const handlePostComment = async (post: RedditPostResult) => {
-    if (!isAuthenticated) {
-      handleRedditLogin();
-      return;
-    }
-
     setCommentingPostId(post.postId);
 
     try {
@@ -146,37 +100,6 @@ export const RedditPostCards: React.FC<RedditPostCardsProps> = ({ posts, onDownl
           </button>
         </div>
         <p className="text-gray-400">Found {posts.length} matching post{posts.length !== 1 ? 's' : ''} from your target audience</p>
-        
-        {/* Reddit Auth Status */}
-        <div className="mt-4 p-3 bg-gray-800/30 rounded-lg border border-gray-600/30">
-          {isAuthenticated && currentUser ? (
-            <div className="flex items-center justify-center gap-2 text-green-400">
-              <span>✅</span>
-              <span>Logged in as u/{currentUser.name}</span>
-              <button
-                onClick={() => {
-                  redditService.logout();
-                  setIsAuthenticated(false);
-                  setCurrentUser(null);
-                }}
-                className="ml-2 text-xs text-gray-400 hover:text-gray-300 underline"
-              >
-                Logout
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center justify-center gap-2 text-yellow-400">
-              <span>⚠️</span>
-              <span>Not logged into Reddit</span>
-              <button
-                onClick={handleRedditLogin}
-                className="ml-2 text-xs bg-orange-600 text-white px-2 py-1 rounded hover:bg-orange-700"
-              >
-                Login to Reddit
-              </button>
-            </div>
-          )}
-        </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
@@ -277,10 +200,8 @@ export const RedditPostCards: React.FC<RedditPostCardsProps> = ({ posts, onDownl
                   >
                     {commentingPostId === post.postId ? (
                       <>⏳ Posting...</>
-                    ) : isAuthenticated ? (
-                      <>🚀 Post Comment</>
                     ) : (
-                      <>🔐 Login & Post</>
+                      <>🚀 Post Comment</>
                     )}
                   </button>
                   <a

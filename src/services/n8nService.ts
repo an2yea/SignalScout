@@ -75,7 +75,7 @@ export function downloadN8nResponse(responseData: string, url: string): void {
  * Trigger n8n Reddit search workflow with dynamic data from Reddit signals
  */
 export async function triggerN8nWorkflow(redditSignals?: RedditSignals): Promise<{ message: string; response: string; payload: any }> {
-  const n8nWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+  const n8nWebhookUrl = '/api/webhook/8138febd-bbde-4789-99bf-cbb41d33c756';
 
   let keywords: string;
   let subcommunities: string;

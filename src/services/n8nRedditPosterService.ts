@@ -13,10 +13,12 @@ interface RedditPostPayload {
  * @returns A promise that resolves with the response from the n8n workflow.
  */
 export async function postCommentToReddit(postId: string, comment: string): Promise<{ message: string; response: string; payload: RedditPostPayload }> {
-  const n8nWebhookUrl = import.meta.env.VITE_N8N_REDDIT_POSTER_URL;
+  // Using a relative path to leverage the Vite proxy and avoid CORS issues.
+  // This is the specific webhook for posting Reddit comments.
+  const n8nWebhookUrl = '/api/webhook-test/5de054fb-afa7-4d1c-94e9-d9545f73ded2';
 
   if (!n8nWebhookUrl) {
-    console.error('VITE_N8N_REDDIT_POSTER_URL is not defined in environment variables.');
+    console.error('The n8n webhook URL is not defined.');
     throw new Error('The n8n Reddit poster webhook URL is not configured.');
   }
 
