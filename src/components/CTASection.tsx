@@ -4,6 +4,7 @@ import { analyzeWebsite, downloadAnalysis, type AnalysisResult } from '../servic
 import { triggerN8nWorkflow, downloadN8nResponse } from '../services/n8nService';
 import { RedditSignals } from '../services/redditSignalService';
 import { ICPDisplay } from './ICPDisplay';
+import { RedditPostCards, type RedditPostResult } from './RedditPostCards';
 
 // A simple URL validation function
 const isValidUrl = (url: string) => {
@@ -23,6 +24,7 @@ export const CTASection: React.FC = () => {
   const [isTriggering, setIsTriggering] = useState(false);
   const [triggerStatus, setTriggerStatus] = useState<string | null>(null);
   const [n8nResponse, setN8nResponse] = useState<string | null>(null);
+  const [redditPosts, setRedditPosts] = useState<RedditPostResult[] | null>(null);
 
   const isUrlValid = isValidUrl(url);
 
@@ -37,6 +39,7 @@ export const CTASection: React.FC = () => {
     setError(null);
     setAnalysisResult(null);
     setN8nResponse(null);
+    setRedditPosts(null);
 
     try {
       const result = await analyzeWebsite(url);
@@ -76,6 +79,16 @@ export const CTASection: React.FC = () => {
       setTriggerStatus(result.message);
       setN8nResponse(result.response);
       
+      // Parse Reddit posts from n8n response
+      try {
+        const parsedPosts: RedditPostResult[] = JSON.parse(result.response);
+        setRedditPosts(parsedPosts);
+        console.log('Parsed Reddit posts:', parsedPosts);
+      } catch (parseError) {
+        console.error('Failed to parse n8n response as Reddit posts:', parseError);
+        setRedditPosts(null);
+      }
+      
       // Auto-download the n8n response
       if (analysisResult?.url) {
         downloadN8nResponse(result.response, analysisResult.url);
@@ -104,6 +117,7 @@ export const CTASection: React.FC = () => {
     setError(null);
     setTriggerStatus(null);
     setN8nResponse(null);
+    setRedditPosts(null);
   };
 
   return (
@@ -192,6 +206,13 @@ export const CTASection: React.FC = () => {
               result={analysisResult} 
               onDownload={handleDownloadAgain}
             />
+
+            {/* Reddit Posts Results */}
+            {redditPosts && redditPosts.length > 0 && (
+              <div className="mt-12">
+                <RedditPostCards posts={redditPosts} />
+              </div>
+            )}
 
             <div className="text-center space-y-4">
               <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
