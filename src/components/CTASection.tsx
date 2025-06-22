@@ -134,12 +134,6 @@ export const CTASection: React.FC = () => {
     }
   };
 
-  const handleDownloadN8nResponse = () => {
-    if (n8nResponse && analysisResult?.url) {
-      downloadN8nResponse(n8nResponse, analysisResult.url);
-    }
-  };
-
   const handleNewAnalysis = () => {
     setAnalysisResult(null);
     setError(null);
