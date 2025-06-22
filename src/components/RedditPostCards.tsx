@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { redditService } from '../services/redditService';
+import { postCommentToReddit } from '../services/n8nRedditPosterService';
 
 export interface RedditPostResult {
   postId: string;
@@ -69,19 +70,17 @@ export const RedditPostCards: React.FC<RedditPostCardsProps> = ({ posts, onDownl
     }
 
     setCommentingPostId(post.postId);
-    
+
     try {
-      await redditService.postComment(post.postId, post.comment);
+      // Use the new n8n service to post the comment
+      await postCommentToReddit(post.postId, post.comment);
       
-      // Show success message
-      alert('Comment posted successfully! 🎉');
-      
-      // Open the Reddit post to view the comment
-      window.open(post.postUrl, '_blank');
-      
+      // Optionally, show a success message that the post request was sent
+      alert('Your comment is being processed and will be posted shortly! 🚀');
+
     } catch (error) {
-      console.error('Failed to post comment:', error);
-      alert(`Failed to post comment: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('Failed to trigger n8n workflow for posting comment:', error);
+      alert(`Failed to trigger post workflow: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setCommentingPostId(null);
     }

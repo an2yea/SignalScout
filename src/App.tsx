@@ -6,6 +6,7 @@ import { RedditPost } from './components/RedditPost';
 import { ConnectionLines } from './components/ConnectionLines';
 import { RedditCallback } from './components/RedditCallback';
 import { TestRedditCards } from './components/TestRedditCards';
+import TestRedditPost from './components/TestRedditPost';
 
 const redditPosts = [
   {
@@ -54,6 +55,11 @@ function App() {
   // Check if this is the test page
   if (window.location.pathname === '/test-reddit') {
     return <TestRedditCards />;
+  }
+
+  // Check if this is the test page for posting to reddit
+  if (window.location.pathname === '/test-reddit-post') {
+    return <TestRedditPost />;
   }
 
   useEffect(() => {
