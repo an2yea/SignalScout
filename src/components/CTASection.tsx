@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { analyzeWebsite, downloadAnalysis, type AnalysisResult } from '../services/analysisService';
 import { triggerN8nWorkflow, downloadN8nResponse } from '../services/n8nService';
 import { RedditSignals } from '../services/redditSignalService';
 import { ICPDisplay } from './ICPDisplay';
 import { RedditPostCards, type RedditPostResult } from './RedditPostCards';
+import testData from '../../analyses/test_data_response.json';
 
 // A simple URL validation function
 const isValidUrl = (url: string) => {
@@ -26,6 +27,33 @@ export const CTASection: React.FC = () => {
   const [n8nResponse, setN8nResponse] = useState<string | null>(null);
   const [redditPosts, setRedditPosts] = useState<RedditPostResult[] | null>(null);
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('test') === 'true') {
+      const mockAnalysisResult: AnalysisResult = {
+        url: 'https://example.com',
+        analysis: JSON.stringify({
+          "companyName": "ExampleCorp",
+          "oneLiner": "We make testing easy.",
+          "icp": {
+            "jobTitles": ["Software Engineer in Test", "QA Manager"],
+            "industries": ["Software Development", "IT Services"],
+            "problem": "Testing is often costly and time-consuming, slowing down development cycles.",
+            "solution": "Our platform provides a mock data-driven testing environment, reducing API costs and speeding up development.",
+            "topics": ["software testing", "quality assurance", "devops", "continous integration"]
+          }
+        }),
+        redditSignals: JSON.stringify({
+          "keywords": ["testing framework", "mocking API", "test data generation"],
+          "subreddits": ["r/softwaretesting", "r/QualityAssurance", "r/developersIndia"]
+        }),
+        timestamp: new Date().toISOString()
+      };
+      setAnalysisResult(mockAnalysisResult);
+      setRedditPosts(testData as RedditPostResult[]);
+    }
+  }, []);
+
   const isUrlValid = isValidUrl(url);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,8 +74,8 @@ export const CTASection: React.FC = () => {
       setAnalysisResult(result);
       setUrl(''); // Clear the input on success
       
-      // Auto-download the analysis
-      downloadAnalysis(result);
+      // Auto-download the analysis - REMOVED
+      // downloadAnalysis(result);
       
     } catch (err: any) {
       setError(err.message || 'An error occurred during analysis');
@@ -210,12 +238,15 @@ export const CTASection: React.FC = () => {
             {/* Reddit Posts Results */}
             {redditPosts && redditPosts.length > 0 && (
               <div className="mt-12">
-                <RedditPostCards posts={redditPosts} />
+                <RedditPostCards 
+                  posts={redditPosts} 
+                  onDownload={() => downloadN8nResponse(n8nResponse || JSON.stringify(redditPosts), analysisResult?.url || '')}
+                />
               </div>
             )}
 
             <div className="text-center space-y-4">
-              <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {(!redditPosts || redditPosts.length === 0) && (
                 <button
                   onClick={handleTriggerN8n}
                   disabled={isTriggering || !analysisResult?.redditSignals}
@@ -223,23 +254,8 @@ export const CTASection: React.FC = () => {
                 >
                   {isTriggering ? 'Triggering...' : 'Start Reddit Hunt 🎯'}
                 </button>
-                
-                {n8nResponse && (
-                  <button
-                    onClick={handleDownloadN8nResponse}
-                    className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-500/50 text-md"
-                  >
-                    📥 Download Reddit Results
-                  </button>
-                )}
-              </div>
-              
-              {!analysisResult?.redditSignals && (
-                <p className="text-gray-400 text-xs mt-2">
-                  Reddit signals not available - analysis may still be processing
-                </p>
               )}
-
+              
               {triggerStatus && (
                 <p className="text-purple-400 text-sm">{triggerStatus}</p>
               )}
