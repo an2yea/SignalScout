@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { NetworkBackground } from './components/NetworkBackground';
 import { CentralHub } from './components/CentralHub';
+import { CTASection } from './components/CTASection';
 import { RedditPost } from './components/RedditPost';
 import { ConnectionLines } from './components/ConnectionLines';
-import { CTASection } from './components/CTASection';
 
 const redditPosts = [
   {

@@ -16,6 +16,8 @@ export const CTASection: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isTriggering, setIsTriggering] = useState(false);
+  const [triggerStatus, setTriggerStatus] = useState<string | null>(null);
 
   const isUrlValid = isValidUrl(url);
 
@@ -31,7 +33,7 @@ export const CTASection: React.FC = () => {
     setSuccessMessage(null);
 
     try {
-      const response = await fetch('http://localhost:3001/api/scrape', {
+      const response = await fetch('/api/scrape', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,6 +53,27 @@ export const CTASection: React.FC = () => {
       setError(err.message);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleTriggerN8n = async () => {
+    setIsTriggering(true);
+    setTriggerStatus(null);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/trigger-n8n', {
+        method: 'POST',
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to trigger workflow');
+      }
+      setTriggerStatus(data.message);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsTriggering(false);
     }
   };
 
@@ -97,6 +120,17 @@ export const CTASection: React.FC = () => {
         <div className="mt-4 h-6">
           {error && <p className="text-red-400 text-sm">{error}</p>}
           {successMessage && <p className="text-green-400 text-sm">{successMessage}</p>}
+          {triggerStatus && <p className="text-purple-400 text-sm mt-2">{triggerStatus}</p>}
+        </div>
+
+        <div className="mt-8">
+          <button
+            onClick={handleTriggerN8n}
+            disabled={isTriggering}
+            className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-md disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isTriggering ? 'Triggering...' : 'Trigger Reddit Search'}
+          </button>
         </div>
 
         <p className="text-gray-500 text-sm mt-8">

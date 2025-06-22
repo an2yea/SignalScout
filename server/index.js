@@ -18,6 +18,10 @@ const analysesDir = path.join(__dirname, '..', 'analyses');
 app.use(cors());
 app.use(express.json());
 
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
 app.post('/api/scrape', async (req, res) => {
   const { url } = req.body;
   if (!url) {
@@ -63,6 +67,45 @@ app.post('/api/scrape', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: 'An error occurred during the process.' });
+  }
+});
+
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
+app.post('/api/trigger-n8n', async (_req, res) => {
+  const n8nWebhookUrl = 'https://nishitrl.app.n8n.cloud/webhook-test/2b0c8e9f-d0bf-4ec9-b699-b5c66220dfd6';
+
+  const subreddits = ['LangChain', 'crewai', 'AI_Agents'];
+  const redditSearchUrl = `https://oauth.reddit.com/r/${subreddits.join('+')}/search`;
+  
+  const keywords = `("stuck" OR "blocked" OR "frustrated" OR "hate" OR "nightmare" OR "pulling my hair" OR "hours wasted" OR "flaky integration") AND ("langchain" OR "crewai" OR "llamaindex" OR "function calling" OR "oauth" OR "token refresh" OR "integration")`;
+
+  const payload = {
+    keywords: keywords,
+    subcommunities: redditSearchUrl,
+  };
+
+  try {
+    const response = await fetch(n8nWebhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`n8n webhook failed with status ${response.status}: ${errorText}`);
+    }
+
+    res.send({ message: 'Successfully triggered n8n workflow.' });
+
+  } catch (error) {
+    console.error('Error triggering n8n webhook:', error);
+    res.status(500).send({ error: 'Failed to trigger n8n workflow.' });
   }
 });
 

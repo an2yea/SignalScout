@@ -15,8 +15,9 @@ export const NetworkBackground: React.FC<NetworkBackgroundProps> = ({ opacity = 
     if (!ctx) return;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const { width, height } = canvas.getBoundingClientRect();
+      canvas.width = width;
+      canvas.height = height;
     };
 
     resizeCanvas();
@@ -55,7 +56,7 @@ export const NetworkBackground: React.FC<NetworkBackgroundProps> = ({ opacity = 
       ctx.strokeStyle = `rgba(59, 130, 246, ${opacity * 0.3})`;
       ctx.lineWidth = 1;
       
-      points.forEach((point, i) => {
+      points.forEach((point) => {
         point.connections.forEach(connectionIndex => {
           const connectedPoint = points[connectionIndex];
           ctx.beginPath();

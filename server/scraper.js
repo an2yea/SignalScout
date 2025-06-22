@@ -1,5 +1,9 @@
 import { chromium } from 'playwright';
 
+/**
+ * @param {string} url
+ * @returns {Promise<string | null>}
+ */
 async function scrapeWebsite(url) {
   let browser = null;
   try {
