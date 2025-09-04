@@ -63,7 +63,7 @@ export const CTASection: React.FC = () => {
                 🎯 Atlan's ICP Analysis
               </h2>
               <p className="text-gray-300 mb-6">
-                Here's Atlan's ideal customer profile and where to find high-intent prospects across social media
+                Here's Atlan's ideal customer profile and where to find high-intent prospects across the open web and social media
               </p>
             </div>
 
@@ -88,7 +88,7 @@ export const CTASection: React.FC = () => {
                   onClick={handleShowRedditPosts}
                   className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-md"
                 >
-                  Start Social Media Hunt 🎯
+                  Start Reddit Hunt 🎯
                 </button>
               )}
 
@@ -97,7 +97,7 @@ export const CTASection: React.FC = () => {
               )}
 
               <p className="text-gray-500 text-sm mt-8">
-                Built by GTM hackers
+                Built by Nishit :)
               </p>
             </div>
           </div>

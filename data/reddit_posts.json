@@ -3,76 +3,76 @@
     "postId": "1km4928",
     "postUrl": "https://reddit.com/r/dataengineering/comments/1km4928/how_much_are_you_paying_for_your_data_catalog/",
     "postTitle": "How much are you paying for your data catalog provider?",
-    "author": "dataengineer123",
+    "author": "data_platform_leader",
     "fitScore": "high",
     "who": "data_platform_leader",
     "matched_signals": [
-      "actively comparing Atlan, DataHub, Informatica, and Collibra",
-      "seeking pricing transparency and usage metrics",
-      "evaluating based on satisfaction and value"
+      "Actively comparing Atlan, DataHub, Informatica, and Collibra",
+      "Seeking pricing transparency and usage metrics",
+      "Evaluating based on satisfaction and value"
     ],
     "rationale": [
       "Direct evaluation of Atlan against competitors indicates active buying process.",
       "Request for pricing and satisfaction data shows budget authority and decision-making role.",
       "Leadership involvement suggests enterprise-level decision with significant budget."
     ],
-    "comment": "Hey! I saw your post about evaluating data catalog providers. At Atlan, we believe in transparent pricing that scales with your actual usage, not arbitrary seat licenses. We've helped teams like yours reduce time-to-insight by 80% while keeping costs predictable. Happy to share detailed pricing and ROI metrics from similar-sized companies. Would you be open to a quick 15-min call to discuss your specific needs?"
+    "comment": "We went through a similar vendor bake-off. One thing that helped was looking beyond license cost to actual adoption metrics (e.g. weekly active users, glossary contributions). Atlan stood out for us because analysts actually used it thanks to Slack/BI tool integrations and intuitive lineage views. Might be worth testing that if you're running a trial — https://atlan.com."
   },
+
   {
-    "postId": "x8y7z6",
-    "postUrl": "https://reddit.com/r/dataengineering/comments/x8y7z6/data_lineage_broken_need_recommendations/",
-    "postTitle": "Our data lineage is completely broken - need recommendations",
-    "author": "frustrated_de",
-    "fitScore": "high",
-    "who": "fintech_data_lead",
-    "matched_signals": [
-      "failed SOC2 audit due to missing data flow documentation",
-      "500 person fintech with Snowflake, DBT, and Airflow stack",
-      "budget approved with Q2 implementation deadline"
+    "postId": 
+    "1dxfgm6",
+    "postUrl": 
+    "https://reddit.com/r/dataengineering/comments/1dxfgm6/data_management_operational_challenges/",
+    "postTitle": 
+    "Data management operational challenges",
+    "author": 
+    "principal_data_engineer",
+    "fitScore": 
+    "medium",
+    "who": 
+    "principal_data_engineer",
+    "matched_signals": 
+    [
+    "Mentions Atlan among tools",
+    "Evaluating build vs buy option",
+    "Operational challenges with pipelines"
     ],
-    "rationale": [
-      "Failed compliance audit creates urgency and executive visibility for solution.",
-      "Modern data stack (Snowflake, DBT, Airflow) perfectly aligns with Atlan's native integrations.",
-      "Approved budget and tight timeline indicates high priority initiative with clear decision authority."
+    "rationale": 
+    [
+    "Principal Data Engineer looking to resolve failing pipelines and improve internal data collaboration.",
+    "Actively researching tools including Atlan, indicating interest in modern data management and potential metadata solutions.",
+    "Evaluating build vs buy suggests a careful procurement process, making this a moderate fit for enterprise governance tooling."
     ],
-    "comment": "Hi! Failed audits are stressful - we've been there. Atlan can automatically map your complete data lineage across Snowflake, DBT, and Airflow within days, not months. We recently helped a 600-person fintech pass their SOC2 audit after implementing our automated lineage tracking. Our column-level lineage and impact analysis would give you the documentation you need for compliance. Can we show you a quick demo with your actual tech stack?"
-  },
-  {
-    "postId": "a9b8c7",
-    "postUrl": "https://reddit.com/r/analytics/comments/a9b8c7/collibra_too_expensive_alternatives/",
-    "postTitle": "Collibra is too expensive - what are teams using instead?",
-    "author": "startup_cto",
-    "fitScore": "high",
-    "who": "startup_cto",
-    "matched_signals": [
-      "Collibra renewal quote 3x increase driving vendor switch",
-      "200 person team using Databricks, dbt, Fivetran",
-      "needs API support without full-time admin overhead"
+    "comment": 
+    "We were in a similar place — tons of engineering hours lost to pipeline firefighting and repeated Slack DMs about table meanings. One thing that helped was centralizing context + lineage so internal teams could self-serve answers and see impacts before making schema changes. We went with Atlan (https://atlan.com) since it integrates cleanly with dbt/Snowflake and handles metadata + PII tagging out of the box, which saved us from custom builds. If you're leaning buy, it’s worth piloting before you commit to build-from-scratch engineering overhead."
+    },
+    {
+    "postId": 
+    "19aeowz",
+    "postUrl": 
+    "https://reddit.com/r/dataengineering/comments/19aeowz/do_you_think_data_engineers_should_have_point/",
+    "postTitle": 
+    "Do you think Data Engineers should have point solutions for Data Observability and Catalog OR prefer a consolidated solution which is seamlessly integrated?",
+    "author": 
+    "de4all",
+    "fitScore": 
+    "medium",
+    "who": 
+    "data_engineer",
+    "matched_signals": 
+    [
+    "mentions Atlan",
+    "compares GE + Open-Metadata",
+    "discusses unified vs point solutions"
     ],
-    "rationale": [
-      "Price shock from incumbent creates immediate opportunity for competitive replacement.",
-      "Modern stack requirements align perfectly with Atlan's integration capabilities.",
-      "CTO involvement and admin overhead concerns indicate need for developer-friendly, low-maintenance solution."
+    "rationale": 
+    [
+    "The post discusses the tension between separate point solutions for data observability and a consolidated solution, a key issue in enterprise metadata strategy.",
+    "It includes mention of Atlan and comparisons with other tools, aligning with enterprise evaluations and active metadata market discussions.",
+    "While the engagement shows interest in integrated solutions, it lacks explicit signals of enterprise-wide governance mandates or large-scale implementations, leading to a medium fit."
     ],
-    "comment": "Hey! Many teams are switching from legacy catalogs to Atlan for exactly these reasons. We offer transparent, usage-based pricing (no surprise 3x increases), native integrations with your entire stack (Databricks, dbt, Fivetran), and our platform is designed for self-service - no dedicated admin needed. Our API-first approach means your developers will love it. Would you like to see a personalized demo with your exact use cases?"
-  },
-  {
-    "postId": "d5e6f7",
-    "postUrl": "https://reddit.com/r/dataengineering/comments/d5e6f7/convince_leadership_need_data_catalog/",
-    "postTitle": "How to convince leadership we need a proper data catalog?",
-    "author": "senior_analyst",
-    "fitScore": "medium",
-    "who": "senior_data_analyst",
-    "matched_signals": [
-      "data scientists waste hours finding right tables",
-      "1000+ undocumented tables in Snowflake",
-      "seeking ROI data and time savings metrics for business case"
-    ],
-    "rationale": [
-      "Clear pain around data discovery inefficiency affecting team productivity.",
-      "Scale of problem (1000+ tables) justifies enterprise solution investment.",
-      "Request for ROI data indicates building business case for budget approval."
-    ],
-    "comment": "I can help with that business case! Our customers typically see 30% productivity gains - that's like adding 3 people to a 10-person team without hiring. For a team with 1000+ Snowflake tables, Atlan customers report 80% reduction in time-to-find-data. We have a ROI calculator and case studies from companies exactly your size. One client saved $400K annually just from reducing duplicate work. Want me to share the specific metrics and calculator?"
-  }
+    "comment": 
+    "Totally hear you — we've dealt with connector gaps and messy handoffs between catalog and observability tools too. One thing that helped us was moving to a platform where lineage, quality, and glossary context all live together — we use Atlan (https://atlan.com) for that reason and it’s saved us from having to awkwardly glue GE outputs into another system."
+    }
 ]
