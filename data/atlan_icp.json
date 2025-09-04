@@ -1,0 +1,46 @@
+{
+  "companyName": "Atlan",
+  "oneLiner": "The Active Metadata Platform for Modern Data Teams",
+  "summary": "Atlan is the active metadata platform trusted by Nasdaq, Dropbox, and Unilever. Built for the modern data stack (Snowflake, DBT, Databricks), Atlan governs $10T+ in enterprise value.",
+  "icp": {
+    "firmographics": {
+      "industry": "Technology, Financial Services, Healthcare, Retail, Manufacturing",
+      "company_size": "500-10,000+ employees",
+      "region": "Global (US, EU, APAC)",
+      "annual_revenue": "$100M-$10B+",
+      "tech_stack": "Snowflake, Databricks, DBT, Tableau, PowerBI",
+      "data_maturity": "Growing data teams (20-200 people) with modern cloud infrastructure"
+    },
+    "personas": [
+      "VP of Data & Analytics",
+      "Chief Data Officer",
+      "Head of Data Platform",
+      "Director of Data Governance",
+      "Chief Information Officer",
+      "Analytics Engineering Lead"
+    ],
+    "pains_triggers": [
+      "Just failed SOC2/GDPR audit due to missing data lineage documentation",
+      "Collibra quote of $170K+ with 12-month implementation timeline",
+      "Data team spending 30% of time searching for trusted datasets",
+      "Paying for unused Snowflake tables and stale dashboards",
+      "Business users can't find data without asking engineering",
+      "Need to enable AI/ML but data quality is questionable",
+      "Alation implementation stalled after 6 months with SI consultants"
+    ],
+    "success_metrics": [
+      "90% of columns auto-documented without manual work",
+      "10x faster analyst onboarding and time to productivity",
+      "Identified up to $500K in unused Snowflake compute costs",
+      "Reduced data discovery time from hours to minutes",
+      "Passed SOC2 audit with complete lineage documentation",
+      "Self-service analytics adoption increased 3x",
+      "Over 10 hours saved per analyst per week on documentation"
+    ]
+  },
+  "jobTitles": ["Head of Data", "Chief Data Officer", "Data Engineering Manager", "Analytics Engineering Lead"],
+  "industries": ["Technology", "Financial Services", "Retail", "Healthcare"],
+  "problem": "Data teams waste 30% of time searching for the right data. Compliance audits fail due to poor documentation. Data quality issues go undetected.",
+  "solution": "Atlan provides an AI-powered data catalog with automated lineage, documentation, and governance - making data discovery instant and trustworthy.",
+  "topics": ["data catalog", "data governance", "metadata management", "data lineage", "data discovery"]
+}

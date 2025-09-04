@@ -1,0 +1,78 @@
+[
+  {
+    "postId": "1km4928",
+    "postUrl": "https://reddit.com/r/dataengineering/comments/1km4928/how_much_are_you_paying_for_your_data_catalog/",
+    "postTitle": "How much are you paying for your data catalog provider?",
+    "author": "dataengineer123",
+    "fitScore": "high",
+    "who": "data_platform_leader",
+    "matched_signals": [
+      "actively comparing Atlan, DataHub, Informatica, and Collibra",
+      "seeking pricing transparency and usage metrics",
+      "evaluating based on satisfaction and value"
+    ],
+    "rationale": [
+      "Direct evaluation of Atlan against competitors indicates active buying process.",
+      "Request for pricing and satisfaction data shows budget authority and decision-making role.",
+      "Leadership involvement suggests enterprise-level decision with significant budget."
+    ],
+    "comment": "Hey! I saw your post about evaluating data catalog providers. At Atlan, we believe in transparent pricing that scales with your actual usage, not arbitrary seat licenses. We've helped teams like yours reduce time-to-insight by 80% while keeping costs predictable. Happy to share detailed pricing and ROI metrics from similar-sized companies. Would you be open to a quick 15-min call to discuss your specific needs?"
+  },
+  {
+    "postId": "x8y7z6",
+    "postUrl": "https://reddit.com/r/dataengineering/comments/x8y7z6/data_lineage_broken_need_recommendations/",
+    "postTitle": "Our data lineage is completely broken - need recommendations",
+    "author": "frustrated_de",
+    "fitScore": "high",
+    "who": "fintech_data_lead",
+    "matched_signals": [
+      "failed SOC2 audit due to missing data flow documentation",
+      "500 person fintech with Snowflake, DBT, and Airflow stack",
+      "budget approved with Q2 implementation deadline"
+    ],
+    "rationale": [
+      "Failed compliance audit creates urgency and executive visibility for solution.",
+      "Modern data stack (Snowflake, DBT, Airflow) perfectly aligns with Atlan's native integrations.",
+      "Approved budget and tight timeline indicates high priority initiative with clear decision authority."
+    ],
+    "comment": "Hi! Failed audits are stressful - we've been there. Atlan can automatically map your complete data lineage across Snowflake, DBT, and Airflow within days, not months. We recently helped a 600-person fintech pass their SOC2 audit after implementing our automated lineage tracking. Our column-level lineage and impact analysis would give you the documentation you need for compliance. Can we show you a quick demo with your actual tech stack?"
+  },
+  {
+    "postId": "a9b8c7",
+    "postUrl": "https://reddit.com/r/analytics/comments/a9b8c7/collibra_too_expensive_alternatives/",
+    "postTitle": "Collibra is too expensive - what are teams using instead?",
+    "author": "startup_cto",
+    "fitScore": "high",
+    "who": "startup_cto",
+    "matched_signals": [
+      "Collibra renewal quote 3x increase driving vendor switch",
+      "200 person team using Databricks, dbt, Fivetran",
+      "needs API support without full-time admin overhead"
+    ],
+    "rationale": [
+      "Price shock from incumbent creates immediate opportunity for competitive replacement.",
+      "Modern stack requirements align perfectly with Atlan's integration capabilities.",
+      "CTO involvement and admin overhead concerns indicate need for developer-friendly, low-maintenance solution."
+    ],
+    "comment": "Hey! Many teams are switching from legacy catalogs to Atlan for exactly these reasons. We offer transparent, usage-based pricing (no surprise 3x increases), native integrations with your entire stack (Databricks, dbt, Fivetran), and our platform is designed for self-service - no dedicated admin needed. Our API-first approach means your developers will love it. Would you like to see a personalized demo with your exact use cases?"
+  },
+  {
+    "postId": "d5e6f7",
+    "postUrl": "https://reddit.com/r/dataengineering/comments/d5e6f7/convince_leadership_need_data_catalog/",
+    "postTitle": "How to convince leadership we need a proper data catalog?",
+    "author": "senior_analyst",
+    "fitScore": "medium",
+    "who": "senior_data_analyst",
+    "matched_signals": [
+      "data scientists waste hours finding right tables",
+      "1000+ undocumented tables in Snowflake",
+      "seeking ROI data and time savings metrics for business case"
+    ],
+    "rationale": [
+      "Clear pain around data discovery inefficiency affecting team productivity.",
+      "Scale of problem (1000+ tables) justifies enterprise solution investment.",
+      "Request for ROI data indicates building business case for budget approval."
+    ],
+    "comment": "I can help with that business case! Our customers typically see 30% productivity gains - that's like adding 3 people to a 10-person team without hiring. For a team with 1000+ Snowflake tables, Atlan customers report 80% reduction in time-to-find-data. We have a ROI calculator and case studies from companies exactly your size. One client saved $400K annually just from reducing duplicate work. Want me to share the specific metrics and calculator?"
+  }
+]

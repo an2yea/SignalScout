@@ -1,0 +1,58 @@
+{
+  "subreddits": [
+    {
+      "name": "r/dataengineering",
+      "members": 120000,
+      "why_relevant": "Data teams discuss catalog implementation failures, lineage issues, and metadata management challenges"
+    },
+    {
+      "name": "r/analytics", 
+      "members": 450000,
+      "why_relevant": "Business users seeking trusted data sources and complaining about data discovery bottlenecks"
+    },
+    {
+      "name": "r/snowflake",
+      "members": 25000, 
+      "why_relevant": "DBT + Snowflake integration challenges and governance gaps discussions"
+    },
+    {
+      "name": "r/enterpriseIT",
+      "members": 85000,
+      "why_relevant": "SOC2/GDPR compliance failures and total cost of ownership discussions"
+    }
+  ],
+  "keyword_clusters": [
+    {
+      "cluster": "implementation_pain",
+      "usp_link": "simplicity",
+      "keywords": "collibra too complex; alation implementation time; data catalog failed; year to implement; SI partner required"
+    },
+    {
+      "cluster": "cost_roi", 
+      "usp_link": "value",
+      "keywords": "collibra $170k; data catalog TCO; cheaper than alation; efficiency gains; productivity; time savings; data monetization; roi"
+    },
+    {
+      "cluster": "compliance_crisis",
+      "usp_link": "governance", 
+      "keywords": "SOC2 no lineage; GDPR compliance; pii tagging; data privacy; data security; compliance audit failed"
+    },
+    {
+      "cluster": "modern_stack",
+      "usp_link": "integration",
+      "keywords": "snowflake dbt catalog; data lineage; impact analysis; metadata management; data governance platform"
+    },
+    {
+      "cluster": "ai_readiness",
+      "usp_link": "ai_prep", 
+      "keywords": "ai governance; data for ai; machine learning; model training; ai readiness; data quality"
+    },
+    {
+      "cluster": "user_adoption",
+      "usp_link": "adoption",
+      "keywords": "self-service; business user; viral adoption; user adoption; data discovery; data catalog search"
+    }
+  ],
+  "boolean_search_query": "(\"collibra too expensive\" OR \"alation alternative\" OR \"data catalog implementation\") AND (\"snowflake\" OR \"databricks\" OR \"dbt\") AND (\"SOC2\" OR \"GDPR\" OR \"compliance\" OR \"pii tagging\") AND (\"lineage\" OR \"impact analysis\" OR \"data discovery\") OR (\"ai governance\" OR \"data for ai\" OR \"ml ops data quality\") OR (\"self-service analytics\" OR \"business user data access\") OR (\"metadata management\" OR \"data governance platform\") OR (\"efficiency gains\" AND \"data catalog\" AND \"roi\")",
+  "reddit_search_url": "https://oauth.reddit.com/r/dataengineering+analytics+snowflake+enterpriseIT/search"
+}

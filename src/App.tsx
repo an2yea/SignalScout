@@ -9,36 +9,38 @@ import { TestRedditCards } from './components/TestRedditCards';
 
 const redditPosts = [
   {
-    text: "Looking for a tool that syncs Notion + Slack",
-    keywords: ["sync", "Notion", "Slack"],
+    text: "Need data catalog for Snowflake + DBT",
+    keywords: ["data catalog", "Snowflake", "DBT"],
     position: { x: 20, y: 30 },
     isMatched: true
   },
   {
-    text: "Need help automating Stripe workflows",
-    keywords: ["automate", "Stripe", "workflows"],
+    text: "Failed SOC2 audit - no data lineage",
+    keywords: ["SOC2", "data lineage", "audit"],
     position: { x: 60, y: 25 },
     isMatched: true
   },
   {
-    text: "Hiring AI infra engineer",
-    keywords: ["AI", "infra", "engineer"],
-    position: { x: 25, y: 70 }
+    text: "Collibra too expensive - alternatives?",
+    keywords: ["Collibra", "expensive", "alternatives"],
+    position: { x: 25, y: 70 },
+    isMatched: true
   },
   {
-    text: "Best CRM for small teams?",
-    keywords: ["CRM", "teams"],
+    text: "Best data governance tools?",
+    keywords: ["data governance", "tools"],
     position: { x: 80, y: 65 }
   },
   {
-    text: "Anyone using headless CMS for e-commerce?",
-    keywords: ["headless", "CMS", "e-commerce"],
+    text: "How to track data quality metrics?",
+    keywords: ["data quality", "metrics", "tracking"],
     position: { x: 15, y: 50 }
   },
   {
-    text: "Looking for API monitoring solution",
-    keywords: ["API", "monitoring"],
-    position: { x: 70, y: 45 }
+    text: "Need metadata management solution",
+    keywords: ["metadata", "management"],
+    position: { x: 70, y: 45 },
+    isMatched: true
   }
 ];
 
